@@ -1,0 +1,215 @@
+/* Base */
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+
+/* Mise en page : charte du logo — bleu marine profond et or, filets dorés comme sous « AFRICA », bandes pleine largeur alternant clair et marine */
+:root{
+  --fond:#F4F5F8;
+  --surface:#FFFFFF;
+  --plaque:#FFFFFF;          /* fond du logo : reste clair dans les deux thèmes */
+  --marine:#182B4C;          /* bleu du logo */
+  --marine-profond:#0F1D36;
+  --or:#C39A42;              /* or du logo */
+  --or-clair:#DDB868;
+  --encre:#182B4C;
+  --texte-doux:#55627A;
+  --trait:#DCE0E8;
+  --sur-marine:#F1F3F7;
+  --police-marque:"Michroma","Arial Black",Arial,sans-serif;
+  --police-titre:"Montserrat","Segoe UI",Arial,sans-serif;
+  --police-texte:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --fond:#0C1628; --surface:#132240; --encre:#E9EDF4; --texte-doux:#A5B0C3; --trait:#22355A;
+    --or:#D4AC57; --or-clair:#E6C67E; --marine-profond:#08111F; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --fond:#0C1628; --surface:#132240; --encre:#E9EDF4; --texte-doux:#A5B0C3; --trait:#22355A;
+  --or:#D4AC57; --or-clair:#E6C67E; --marine-profond:#08111F; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--fond);color:var(--encre);font-family:var(--police-texte);font-size:17px;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+h1,h2,h3{font-family:var(--police-titre);margin:0;text-wrap:balance;line-height:1.15}
+p{margin:0}
+
+.bande{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.conteneur{max-width:1180px;margin:0 auto}
+.section{padding-block:clamp(60px,8vw,100px)}
+.surtitre{display:inline-flex;align-items:center;gap:12px;font-family:var(--police-titre);font-weight:600;font-size:.76rem;letter-spacing:.32em;text-transform:uppercase;color:var(--or)}
+.surtitre::before{content:"";width:34px;height:1.5px;background:var(--or)}
+.titre-section{font-size:clamp(1.9rem,3.8vw,2.8rem);font-weight:700;margin-top:14px;letter-spacing:-.01em}
+.intro-section{color:var(--texte-doux);max-width:62ch;margin-top:14px;font-size:1.08rem}
+.entete-section{margin-bottom:46px}
+
+/* Boutons */
+.bouton{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--police-titre);font-weight:600;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:15px 26px;border-radius:2px;border:1.5px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.bouton-or{background:linear-gradient(100deg,var(--or),var(--or-clair));color:#0F1D36}
+.bouton-or:hover{background:var(--or-clair)}
+.bouton-marine{background:var(--marine);color:#F1F3F7}
+.bouton-marine:hover{background:var(--marine-profond)}
+.bouton-contour{border-color:currentColor;color:inherit;background:transparent}
+.bouton-contour:hover{border-color:var(--or);color:var(--or)}
+
+/* En-tête */
+.entete{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--plaque);border-bottom:1px solid #E3E6EC;color:#182B4C}
+.entete .conteneur{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo img{height:40px;width:auto}
+.logo-texte{font-family:var(--police-marque);font-size:1.05rem;letter-spacing:.06em;line-height:1;color:#182B4C}
+.logo-texte span{display:block;font-family:var(--police-titre);font-weight:600;font-size:.62rem;letter-spacing:.62em;color:#C39A42;margin-top:6px}
+.menu{display:flex;gap:28px;align-items:center}
+.menu a{text-decoration:none;font-family:var(--police-titre);font-size:.82rem;font-weight:600;letter-spacing:.04em;color:#182B4C}
+.menu a:hover{color:#C39A42}
+.menu .bouton{color:#0F1D36;padding:11px 18px;font-size:.76rem}
+.bouton-menu{display:none;background:none;border:1.5px solid #182B4C;color:#182B4C;border-radius:2px;padding:8px 14px;font-family:var(--police-titre);font-weight:700;font-size:.74rem;letter-spacing:.16em;cursor:pointer}
+@media (max-width:900px){
+  .bouton-menu{display:block}
+  .menu{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:#FFFFFF;padding:6px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px));border-bottom:1px solid #E3E6EC;box-shadow:0 18px 30px -18px rgba(15,29,54,.35)}
+  .menu.ouvert{display:flex}
+  .menu a{padding:14px 0;border-bottom:1px solid #EDEFF3}
+  .menu .bouton{margin-top:14px;border-bottom:none}
+}
+
+/* Accueil : bande marine, titre à gauche, six domaines à droite ; facette dorée reprise de la barre du « T » du logo */
+.accueil{background:#122340;color:#F1F3F7;position:relative;overflow:hidden}
+.accueil::before{content:"";position:absolute;right:-8%;top:-30%;width:62%;height:160%;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,0) 60%);transform:skewX(-24deg);pointer-events:none}
+.accueil::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#C39A42,#DDB868 40%,transparent)}
+.accueil .conteneur{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,5vw,72px);align-items:center;padding-block:clamp(56px,8vw,104px)}
+.accueil .conteneur > *{min-width:0}
+.accueil .surtitre{color:#DDB868}
+.accueil .surtitre::before{background:#DDB868}
+.accueil h1{font-size:clamp(2.3rem,5vw,3.9rem);font-weight:700;letter-spacing:-.015em;line-height:1.08;margin-top:20px}
+.accueil h1 em{font-style:normal;background:linear-gradient(100deg,#C39A42,#E6C67E);-webkit-background-clip:text;background-clip:text;color:transparent}
+.accueil-texte{max-width:56ch;margin-top:22px;color:rgba(241,243,247,.78);font-size:1.1rem}
+.accueil-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.accueil .bouton-contour{color:#F1F3F7}
+.accueil-atouts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:38px;padding-top:22px;border-top:1px solid rgba(241,243,247,.14);font-family:var(--police-titre);font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(241,243,247,.7)}
+.accueil-atouts span{display:inline-flex;align-items:center;gap:10px}
+.accueil-atouts span::before{content:"";width:6px;height:6px;background:#C39A42;transform:rotate(45deg)}
+
+/* Tuiles des six domaines dans l'accueil */
+.tuiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(241,243,247,.14);border:1px solid rgba(241,243,247,.14)}
+.tuiles li{background:#122340;min-width:0}
+.tuiles a{display:flex;flex-direction:column;gap:14px;height:100%;padding:24px 22px;text-decoration:none;color:#F1F3F7;font-family:var(--police-titre);font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;line-height:1.35;transition:background .2s}
+.tuiles a:hover{background:#18305A}
+.tuiles svg{width:36px;height:36px;color:#F1F3F7}
+.tuiles a span{display:block;font-family:var(--police-texte);font-weight:400;font-size:.88rem;letter-spacing:0;text-transform:none;color:rgba(241,243,247,.62);margin-top:4px}
+@media (max-width:900px){.accueil .conteneur{grid-template-columns:1fr}}
+@media (max-width:420px){.tuiles a{padding:18px 14px}}
+
+/* À propos */
+.apropos{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(36px,6vw,80px);align-items:start}
+.apropos > *{min-width:0}
+.apropos-texte{display:grid;gap:18px;font-size:1.08rem;color:var(--texte-doux);max-width:64ch}
+.apropos-texte p:first-child{font-size:1.22rem;color:var(--encre);font-weight:500;line-height:1.5}
+.piliers{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:34px;border-top:1px solid var(--trait)}
+.pilier{padding:18px 14px 0 0;min-width:0}
+.pilier strong{display:block;font-family:var(--police-titre);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase}
+.pilier::before{content:"";display:block;width:22px;height:2px;background:var(--or);margin-bottom:12px}
+.engagement{margin-top:34px;padding:24px 26px;background:var(--surface);border:1px solid var(--trait);border-left:3px solid var(--or)}
+.engagement .surtitre::before{display:none}
+.engagement p{margin-top:8px;font-family:var(--police-titre);font-weight:600;font-size:1.12rem;line-height:1.45;color:var(--encre)}
+.signature{margin-top:12px;font-size:.9rem;color:var(--texte-doux)}
+@media (max-width:900px){.apropos{grid-template-columns:1fr}}
+@media (max-width:560px){.piliers{grid-template-columns:repeat(2,1fr);row-gap:18px}}
+
+/* Icônes : trait marine, détail or (couleurs fixes ou héritées selon le fond) */
+.ic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ic .or{stroke:var(--or)}
+
+/* Domaines détaillés */
+.cartes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.carte{background:var(--surface);border:1px solid var(--trait);padding:30px 28px 28px;display:flex;flex-direction:column;gap:14px;min-width:0;position:relative;transition:border-color .2s,transform .2s}
+.carte::after{content:"";position:absolute;left:28px;right:28px;top:-1px;height:2px;background:linear-gradient(90deg,var(--or),var(--or-clair));transform:scaleX(.18);transform-origin:left;transition:transform .3s}
+.carte:hover{border-color:color-mix(in srgb,var(--or) 50%,var(--trait))}
+.carte:hover::after{transform:scaleX(1)}
+.carte-tete{display:flex;align-items:center;gap:16px}
+.carte-tete svg{width:46px;height:46px;flex:none;color:var(--encre)}
+.carte h3{font-size:1.12rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.carte p{color:var(--texte-doux);font-size:.98rem}
+.carte ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:.95rem}
+.carte li{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:baseline}
+.carte li::before{content:"";width:8px;height:1.5px;background:var(--or);transform:translateY(-4px)}
+@media (max-width:980px){.cartes{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.cartes{grid-template-columns:1fr}}
+
+/* Zoom EPI */
+.epi{background:var(--marine);color:var(--sur-marine)}
+.epi .surtitre{color:var(--or-clair)}
+.epi .surtitre::before{background:var(--or-clair)}
+.epi .intro-section{color:color-mix(in srgb,var(--sur-marine) 75%,transparent)}
+.epi-grille{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.epi-grille > *{min-width:0}
+.normes{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(221,184,104,.35)}
+.norme{padding:16px 16px 16px 0;border-bottom:1px solid rgba(241,243,247,.12);min-width:0}
+.norme:nth-child(odd){border-right:1px solid rgba(241,243,247,.12)}
+.norme:nth-child(even){padding-left:18px}
+.norme strong{display:block;font-family:var(--police-titre);font-size:.98rem;font-weight:600}
+.norme span{font-size:.86rem;color:var(--or-clair);letter-spacing:.03em}
+@media (max-width:860px){.epi-grille{grid-template-columns:1fr;gap:36px}}
+@media (max-width:460px){.normes{grid-template-columns:1fr}.norme:nth-child(odd){border-right:none}.norme:nth-child(even){padding-left:0}}
+
+/* Secteurs */
+.secteurs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--trait);border-left:1px solid var(--trait)}
+.secteur{padding:24px 22px;border-right:1px solid var(--trait);border-bottom:1px solid var(--trait);min-width:0}
+.secteur h3{font-size:1rem;font-weight:700;letter-spacing:.02em}
+.secteur p{color:var(--texte-doux);font-size:.93rem;margin-top:6px}
+@media (max-width:900px){.secteurs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.secteurs{grid-template-columns:1fr}}
+
+/* Démarche */
+.demarche-bande{background:var(--surface);border-block:1px solid var(--trait)}
+.etapes{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;list-style:none;margin:0;padding:0;counter-reset:etape}
+.etape{counter-increment:etape;min-width:0}
+.etape::before{content:counter(etape,decimal-leading-zero);display:block;font-family:var(--police-marque);font-size:1.7rem;color:var(--or);padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--trait)}
+.etape h3{font-size:1.02rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.etape p{color:var(--texte-doux);font-size:.95rem;margin-top:8px}
+@media (max-width:900px){.etapes{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.etapes{grid-template-columns:1fr}}
+
+/* Devis */
+.devis{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+.devis > *{min-width:0}
+.coordonnees{display:grid;gap:0;margin:32px 0 0;border-top:1px solid var(--trait)}
+.coordonnee{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--trait)}
+.coordonnee dt{font-family:var(--police-titre);font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--or);padding-top:3px}
+.coordonnee dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.a-completer{background:color-mix(in srgb,var(--or) 22%,transparent);padding:0 5px;border-radius:2px}
+.formulaire{background:var(--surface);border:1px solid var(--trait);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative}
+.formulaire::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:linear-gradient(90deg,var(--marine),var(--marine) 60%,var(--or) 60%,var(--or-clair))}
+.champ{display:flex;flex-direction:column;gap:7px;min-width:0}
+.champ.large{grid-column:1/-1}
+.champ label{font-family:var(--police-titre);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--texte-doux)}
+.champ input,.champ select,.champ textarea{font:inherit;font-size:1rem;color:var(--encre);background:var(--fond);border:1px solid var(--trait);border-radius:2px;padding:12px 13px;width:100%}
+.champ textarea{min-height:120px;resize:vertical}
+.champ input:focus,.champ select:focus,.champ textarea:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px color-mix(in srgb,var(--or) 22%,transparent)}
+.formulaire > .bouton{grid-column:1/-1}
+.erreur{grid-column:1/-1;color:#C2410C;font-size:.94rem}
+.recap{grid-column:1/-1;background:var(--fond);border:1px solid var(--or);padding:18px;font-size:.96rem}
+.recap pre{white-space:pre-wrap;font-family:Consolas,"Courier New",monospace;font-size:.84rem;margin:10px 0 14px;overflow-wrap:anywhere}
+.recap-actions{display:flex;flex-wrap:wrap;gap:10px}
+.recap-actions .bouton{padding:11px 18px;font-size:.76rem}
+@media (max-width:900px){.devis{grid-template-columns:1fr;gap:40px}}
+@media (max-width:520px){.formulaire{grid-template-columns:1fr;padding:22px}.coordonnee{grid-template-columns:1fr;gap:2px}}
+
+/* Pied de page */
+.pied{background:var(--marine-profond);color:rgba(241,243,247,.72);font-size:.92rem}
+.pied-haut{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding-block:52px 36px}
+.pied-haut > *{min-width:0}
+.pied .marque{font-family:var(--police-marque);font-size:1.3rem;letter-spacing:.06em;color:#F1F3F7}
+.pied .marque span{display:block;font-family:var(--police-titre);font-weight:600;font-size:.66rem;letter-spacing:.62em;color:#DDB868;margin-top:8px}
+.pied h3{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#DDB868;font-weight:600;margin-bottom:14px}
+.pied ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.pied a{text-decoration:none}
+.pied a:hover{color:#DDB868}
+.pied-bas{border-top:1px solid rgba(241,243,247,.12);padding-block:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.84rem}
+@media (max-width:780px){.pied-haut{grid-template-columns:1fr 1fr}.pied-haut > :first-child{grid-column:1/-1}}
